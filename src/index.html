@@ -1,17 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Vanilla JavaScript App</title>
+    <title>Visa Appointment Search</title>
 </head>
-
 <body>
-  <main>
-    <h1>Vanilla JavaScript App</h1>
-  </main>
-</body>
+    <p id="result"></p>
+    <div id="city-buttons"></div>
+    <script src="functions.js"></script>
+    <script>
+        var cityNames = {
+            65: "Ciudad Juarez",
+            66: "Guadalajara",
+            67: "Hermosillo",
+            68: "Matamoros",
+            69: "Merida",
+            70: "Mexico City",
+            71: "Monterrey",
+            72: "Nogales",
+            73: "Nuevo Laredo",
+            74: "Tijuana"
+        };
 
+        var cityButtons = document.getElementById("city-buttons");
+
+        for (var cityId in cityNames) {
+            var cityName = cityNames[cityId];
+            var button = document.createElement("button");
+            button.textContent = cityName;
+            (function(id) {
+                button.onclick = function() {
+                    searchCity(id);
+                };
+            })(cityId);
+            cityButtons.appendChild(button);
+        }
+    </script>
+</body>
 </html>

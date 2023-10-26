@@ -1,3 +1,5 @@
 node_modules/
 /test-results/
 
+# Mac files
+.DS_Store

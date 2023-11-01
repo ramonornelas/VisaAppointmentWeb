@@ -2,10 +2,11 @@
 <html>
 <head>
     <title>Visa Appointment Search</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <p id="result"></p>
-    <div id="city-buttons"></div>
+    <div id="city-buttons" class="center-buttons"></div>
     <script src="functions.js"></script>
     <script>
         var cityNames = {
@@ -18,21 +19,33 @@
             71: "Monterrey",
             72: "Nogales",
             73: "Nuevo Laredo",
-            74: "TJ"
+            74: "Tijuana"
         };
 
         var cityButtons = document.getElementById("city-buttons");
 
-        for (var cityId in cityNames) {
-            var cityName = cityNames[cityId];
+        function createButton(cityId, cityName) {
             var button = document.createElement("button");
             button.textContent = cityName;
-            (function(id) {
-                button.onclick = function() {
-                    searchCity(id);
-                };
-            })(cityId);
+            button.className = "large-button";
+            button.onclick = function() {
+                searchCity(cityId).then(result => {
+                    button.textContent = result;
+                });
+            };
+            return button;
+        }
+
+        for (var cityId in cityNames) {
+            var cityName = cityNames[cityId];
+            var button = createButton(cityId, cityName);
             cityButtons.appendChild(button);
+
+            // Add two break elements after each button
+            var br1 = document.createElement("br");
+            var br2 = document.createElement("br");
+            cityButtons.appendChild(br1);
+            cityButtons.appendChild(br2);
         }
     </script>
 </body>

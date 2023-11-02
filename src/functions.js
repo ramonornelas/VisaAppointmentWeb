@@ -1,5 +1,7 @@
 function searchCity(cityId) {
-  url = 'https://appointment-checker.azurewebsites.net/api/endpoint?cityId=' + cityId;
+    var userSelect = document.getElementById("user-select");
+    var selectedUser = userSelect.options[userSelect.selectedIndex].value;
+    url = 'https://appointment-checker.azurewebsites.net/api/endpoint?cityId=' + cityId + '&user=' + selectedUser;
 
   return fetch(url)
       .then(response => response.json())

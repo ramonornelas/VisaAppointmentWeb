@@ -5,7 +5,15 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <p id="result"></p>
+    <br>
+    <select id="user-select" class="big-centered-dropdown">
+        <option value="Unknown">(Select user)</option>
+        <option value="Sol">Sol</option>
+        <option value="Xavier">Xavier</option>
+        <option value="Carlos">Carlos</option>
+        <option value="Ramon">Ramon</option>
+    </select>
+    <br>
     <div id="city-buttons" class="center-buttons"></div>
     <script src="functions.js"></script>
     <script>
@@ -31,6 +39,18 @@
             button.onclick = function() {
                 searchCity(cityId).then(result => {
                     button.textContent = result;
+                    // Change the color based on the result
+                    if (result.includes("AVAILABLE DATE!!!")) {
+                        button.style.backgroundColor = "green";
+                    } else if (result.includes("No dates available.")) {
+                        button.style.backgroundColor = "yellow";
+                    } else if (result.includes("First available date:")) {
+                        button.style.backgroundColor = "blue";
+                    } else if (result.includes("error")) {
+                        button.style.backgroundColor = "red";
+                    } else {
+                        button.style.backgroundColor = "gray";
+                    }
                 });
             };
             return button;
@@ -43,9 +63,9 @@
 
             // Add two break elements after each button
             var br1 = document.createElement("br");
-            var br2 = document.createElement("br");
+            //var br2 = document.createElement("br");
             cityButtons.appendChild(br1);
-            cityButtons.appendChild(br2);
+            //cityButtons.appendChild(br2);
         }
     </script>
 </body>

@@ -2,13 +2,6 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-html, body {
-  margin: 0;
-  border: 0;
-  padding: 0;
-  background-color: #fff;
-}
-
 main {
   margin: auto;
   width: 50%;
@@ -20,21 +13,34 @@ main > h1 {
   font-size: 3.5em;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.big-centered-dropdown, .center-buttons, #mocked-data-checkbox, #mocked-data-count {
+  margin-bottom: 10px;
+}
+
 .large-button {
-  font-size: 20px;
-  padding: 8px 20px;
+  background-color: #434543; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 500px;
 }
 
-.center-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.large-button:hover {
+  background-color: #9db39e;
 }
 
-.big-centered-dropdown {
-  width: 150px;  /* Adjust as needed */
-  height: 40px;  /* Adjust as needed */
-  font-size: 16px;  /* Adjust as needed */
-  margin: 0 auto;  /* Center the dropdown */
-  display: block;  /* Needed for centering */
+#mocked-data-count {
+  width: 70px;
 }

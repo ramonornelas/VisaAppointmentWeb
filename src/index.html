@@ -6,14 +6,6 @@
 </head>
 <body>
     <br>
-    <select id="user-select" class="big-centered-dropdown">
-        <option value="Unknown">(Select user)</option>
-        <option value="Sol">Sol</option>
-        <option value="Xavier">Xavier</option>
-        <option value="Carlos">Carlos</option>
-        <option value="Ramon">Ramon</option>
-    </select>
-    <br>
     <div id="city-buttons" class="center-buttons"></div>
     <script src="functions.js"></script>
     <script>
@@ -42,14 +34,19 @@
                     // Change the color based on the result
                     if (result.includes("AVAILABLE DATE!!!")) {
                         button.style.backgroundColor = "green";
+                        button.style.color = "black";
                     } else if (result.includes("No dates available.")) {
                         button.style.backgroundColor = "yellow";
+                        button.style.color = "black";
                     } else if (result.includes("First available date:")) {
                         button.style.backgroundColor = "blue";
-                    } else if (result.includes("error")) {
+                        button.style.color = "white";
+                    } else if (result.includes("error")|| result.includes("Error")) {
                         button.style.backgroundColor = "red";
+                        button.style.color = "white";
                     } else {
                         button.style.backgroundColor = "gray";
+                        button.style.color = "black";
                     }
                 });
             };
@@ -61,12 +58,21 @@
             var button = createButton(cityId, cityName);
             cityButtons.appendChild(button);
 
-            // Add two break elements after each button
             var br1 = document.createElement("br");
-            //var br2 = document.createElement("br");
             cityButtons.appendChild(br1);
-            //cityButtons.appendChild(br2);
         }
     </script>
+    <br>
+    <input type="checkbox" id="local-endpoint">
+    <label for="local-endpoint">Connect to local endpoint</label>
+    <br>
+    <input type="checkbox" id="mocked-data-checkbox" onchange="toggleMockedDataCount()">
+    <label for="mocked-data-checkbox">Use mocked data</label>
+    <br>
+    <label for="mocked-data-count">Mocked elements: </label>
+    <input type="number" id="mocked-data-count" min="1" value="10" disabled>
+    <br>
+    <label for="start-date">Start Date: </label>
+    <input type="date" id="start-date" value="2024-10-29" disabled>
 </body>
 </html>

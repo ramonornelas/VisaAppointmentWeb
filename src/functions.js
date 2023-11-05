@@ -1,19 +1,44 @@
+function toggleMockedDataCount() {
+    var mockedDataCheckbox = document.getElementById("mocked-data-checkbox");
+    var mockedDataCount = document.getElementById("mocked-data-count");
+    mockedDataCount.disabled = !mockedDataCheckbox.checked;
+    var startDate = document.getElementById("start-date");
+    startDate.disabled = !mockedDataCheckbox.checked;
+}
+
 function searchCity(cityId) {
-    var userSelect = document.getElementById("user-select");
-    var selectedUser = userSelect.options[userSelect.selectedIndex].value;
-    url = 'https://appointment-checker.azurewebsites.net/api/endpoint?cityId=' + cityId + '&user=' + selectedUser;
+    var mockedDataChecked = document.getElementById("mocked-data-checkbox").checked;
+    var localEndpointChecked = document.getElementById("local-endpoint").checked;
+    var startDate = document.getElementById("start-date").value;
+    var mockedDataCount;
+    var platformName = navigator.platform;
+
+    if (mockedDataChecked) {
+        mockedDataCount = document.getElementById("mocked-data-count").value;
+        if (!mockedDataCount) {
+            alert("Please enter the number of mocked elements.");
+            return;
+        }
+    } else
+        mockedDataCount = -1;
+
+    if (localEndpointChecked) {
+        url = 'http://127.0.0.1:5000/endpoint';
+    } else {
+        url = 'https://appointment-checker.azurewebsites.net/api/endpoint';
+    }
+    url = url + '?cityId=' + cityId;
+    url = url + '&platformName=' + encodeURIComponent(platformName);
+    url = url + '&mockedDataCount=' + mockedDataCount;
+    url = url + '&startDate=' + encodeURIComponent(startDate);
 
   return fetch(url)
       .then(response => response.json())
       .then(data => {
           const text = data.result;
-          //var resultElement = document.getElementById("result");
-          //resultElement.innerHTML = text;
-          return text;  // return the text here
+          return text;
       })
       .catch(error => {
-          //var resultElement = document.getElementById("result");
-          //resultElement.innerHTML = "Error fetching data from the endpoint";
-          return "Error fetching data from the endpoint";  // return the error message here
+          return "Error fetching data from the endpoint";
       });
 }

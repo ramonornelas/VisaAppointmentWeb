@@ -25,7 +25,7 @@ body {
 
 .large-button {
   background-color: #434543; /* Green */
-  border: none;
+  border: 1px solid #434543;
   color: white;
   padding: 15px 32px;
   text-align: center;
@@ -35,12 +35,24 @@ body {
   margin: 4px 2px;
   cursor: pointer;
   width: 500px;
+  transition: background-color 0.3s ease;
 }
 
 .large-button:hover {
-  background-color: #9db39e;
+  opacity: 0.8;
 }
 
 #mocked-data-count {
   width: 70px;
+}
+
+#advanced-options {
+    display: none;
+    margin-top: 20px;
+}
+
+.toggle-button {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
 }

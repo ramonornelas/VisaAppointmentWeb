@@ -42,3 +42,32 @@ function searchCity(cityId) {
           return "Error fetching data from the endpoint";
       });
 }
+
+function createButton(cityId, cityName) {
+    var button = document.createElement("button");
+    button.textContent = cityName;
+    button.className = "large-button";
+    button.onclick = function() {
+        searchCity(cityId).then(result => {
+            button.textContent = result;
+            // Change the color based on the result
+            if (result.includes("AVAILABLE DATE!!!")) {
+                button.style.backgroundColor = "green";
+                button.style.color = "black";
+            } else if (result.includes("No dates available.")) {
+                button.style.backgroundColor = "yellow";
+                button.style.color = "black";
+            } else if (result.includes("First available date:")) {
+                button.style.backgroundColor = "blue";
+                button.style.color = "white";
+            } else if (result.includes("error")|| result.includes("Error")) {
+                button.style.backgroundColor = "red";
+                button.style.color = "white";
+            } else {
+                button.style.backgroundColor = "gray";
+                button.style.color = "black";
+            }
+        });
+    };
+    return button;
+}

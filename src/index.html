@@ -24,55 +24,41 @@
 
         var cityButtons = document.getElementById("city-buttons");
 
-        function createButton(cityId, cityName) {
-            var button = document.createElement("button");
-            button.textContent = cityName;
-            button.className = "large-button";
-            button.onclick = function() {
-                searchCity(cityId).then(result => {
-                    button.textContent = result;
-                    // Change the color based on the result
-                    if (result.includes("AVAILABLE DATE!!!")) {
-                        button.style.backgroundColor = "green";
-                        button.style.color = "black";
-                    } else if (result.includes("No dates available.")) {
-                        button.style.backgroundColor = "yellow";
-                        button.style.color = "black";
-                    } else if (result.includes("First available date:")) {
-                        button.style.backgroundColor = "blue";
-                        button.style.color = "white";
-                    } else if (result.includes("error")|| result.includes("Error")) {
-                        button.style.backgroundColor = "red";
-                        button.style.color = "white";
-                    } else {
-                        button.style.backgroundColor = "gray";
-                        button.style.color = "black";
-                    }
-                });
-            };
-            return button;
-        }
+        window.onload = function() {
+            for (var cityId in cityNames) {
+                var cityName = cityNames[cityId];
+                var button = createButton(cityId, cityName);
+                cityButtons.appendChild(button);
 
-        for (var cityId in cityNames) {
-            var cityName = cityNames[cityId];
-            var button = createButton(cityId, cityName);
-            cityButtons.appendChild(button);
+                var br1 = document.createElement("br");
+                cityButtons.appendChild(br1);
+            }
 
-            var br1 = document.createElement("br");
-            cityButtons.appendChild(br1);
-        }
+            document.getElementById('toggle-button').addEventListener('click', function() {
+                var advancedOptions = document.getElementById('advanced-options');
+                if (advancedOptions.style.display === 'none' || advancedOptions.style.display === '') {
+                    advancedOptions.style.display = 'block';
+                } else {
+                    advancedOptions.style.display = 'none';
+                }
+            });
+        };
     </script>
+
     <br>
-    <input type="checkbox" id="local-endpoint">
-    <label for="local-endpoint">Connect to local endpoint</label>
-    <br>
-    <input type="checkbox" id="mocked-data-checkbox" onchange="toggleMockedDataCount()">
-    <label for="mocked-data-checkbox">Use mocked data</label>
-    <br>
-    <label for="mocked-data-count">Mocked elements: </label>
-    <input type="number" id="mocked-data-count" min="1" value="10" disabled>
-    <br>
-    <label for="start-date">Start Date: </label>
-    <input type="date" id="start-date" value="2024-10-29" disabled>
+    <p id="toggle-button" class="toggle-button">Advanced options</p>
+    <div id="advanced-options">
+        <input type="checkbox" id="local-endpoint">
+        <label for="local-endpoint">Connect to local endpoint</label>
+        <br>
+        <input type="checkbox" id="mocked-data-checkbox" onchange="toggleMockedDataCount()">
+        <label for="mocked-data-checkbox">Use mocked data</label>
+        <br>
+        <label for="mocked-data-count">Mocked elements: </label>
+        <input type="number" id="mocked-data-count" min="1" value="10" disabled>
+        <br>
+        <label for="start-date">Start Date: </label>
+        <input type="date" id="start-date" value="2024-10-29" disabled>
+    </div>
 </body>
 </html>
